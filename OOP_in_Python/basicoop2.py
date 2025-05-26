@@ -11,7 +11,7 @@ class Employee: #สร้างคลาส ชื่อEmployee
         
         #เรียกใช้งาน method name ใน class Employee
         self.name = "เอ๊ะปวาริษา"
-        self.salary = "40000"#self.salary คือ เรียกใช้งาน method ชื่อ self จุด กำหนดชื่อว่า salary และส่งค่ามาเป็น 40000
+        self.salary = "50000"#self.salary คือ เรียกใช้งาน method ชื่อ self จุด กำหนดชื่อว่า salary และส่งค่ามาเป็น 40000
         self.position = "โปรแกรมเมอร์"
         print("ชื่อพนักงาน = {}".format(self.name))  #={}.format() คือการส่งค่ามาเป็นตัวแปร 
         #,format(self.name) คือส่งค่ามาเป็นตัวแปรชื่อ name ที่มีค่าเป็นชื่อ "เอ๊ะปวาริษา" ที่เรากําหนดไว้
