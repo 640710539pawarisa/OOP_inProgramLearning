@@ -1,6 +1,7 @@
-#super class
-#ระบุ class แม่ และกำหนดการทำงานให้กับ class ย่อย
-#ใส่ชื่อและเงินเดือน ใน parameter constructor __init__ ในคลาสย่อย
+#แปลง object เป็น string
+
+#และเราจะสร้าง method คำนวณรายได้ของพนักงาน
+
 class Employee: # class แม่
     #class variable มันเป็น public  
     
@@ -18,8 +19,8 @@ class Employee: # class แม่
         #note : จะถูกเข้าถึงได้ก็ต่อเมื่อ สร้างวัตถุ จาก class Employee
         
     #private method
+    #แสดงรายละเอียดของพนักงาน
     def _showdata(self): 
-#ใส่ _ ด้านหน้าชื่อ methodเป็นการบอกว่าเป็น protected ถ้าเอา _ ออกจะเป็นแบบ public หรือใส่ __ ด้านหน้าชื่อ methodเป็นการบอกว่าเป็น private
         print("ชื่อพนักงาน = ",self.__name)
         print("----------------------")
         print("เงินเดือน = ",self.__salary)
@@ -27,17 +28,35 @@ class Employee: # class แม่
         print("ตําแหน่ง = ",self.__position)
         print("----------------------")
         
+#******เพิ่มโค้ดส่วนนี้***********
+#สร้าง method ที่จะคํานวณรายได้ของพนักงาน
+#รายได้ต่อปี = เงินเดือน * 12 + โบนัส
+    def _getsalaryIncome(self):
+        return self.__salary * 12 #รายได้ต่อปี self.__salary * 12คือ ตัวเอง.__เงินเดือน * 12
+    
+    
+#*********เพิ่มโค้ดส่วนนี้********
+#ในส่วนการแปลง object เป็น string ใช้ __str__()
+    def __str__(self):
+        return "ชื่อพนักงาน = {}\nเงินเดือน = {}\nตําแหน่ง = {}\nรายได้ต่อปี = {}\n".format(self.__name,self.__salary,self.__position,self._getsalaryIncome())
+    print("----------------------")
+    #ส่งค่าออกไป เป็น string "ส่วนที่ 1 {}\nส่วนที่ 2 {}\nส่วนที่ 3".format(ค่าที่ต้องการส่งออกไป)
+    #fomat ใช้ในการแสดงผล
+    #มีส่วนนี้ ตรงส่วน showdataไม่จำเป็นแล้ว
+    
+#-----------------------------------------------------------------------------------
+        
 #สร้าง class สืบทอดคุณสมบัติ 
 #class ลูก
 
-class Accountant(Employee): #สืบทอดคุณสมบัติมาจาก Employee ชื่อ class ว่า่ Accountant
+class Accountant(Employee): 
     #สร้าง constructorภายในคลาสลูก เพื่อไม่ให้ตอนสร้าง object ไม่ต้องไปเอาconstructor จาก class แม่***
     
     #เขียนชื่อ แผนก
     __position = "แผนกบัญชี"
-    def __init__(self,name,salary,position): #เพิ่ม parameter ที่จะส่งเข้าไป***ในconstructor
-        super().__init__(name,salary,position) #สืบทอดคุณสมบัติมาจาก Employee  *****เพิ่มส่วนนี้
-        super()._showdata()#คือเรียกใช้ method ชื่อ _showdataจากคลาสแม่โดยใช้คําสั่ง super
+    def __init__(self,name,salary,position): 
+        super().__init__(name,salary,position) 
+        super()._showdata()
     
 class Manager(Employee):
     #เขียนชื่อ แผนก
@@ -45,7 +64,6 @@ class Manager(Employee):
     #สร้าง constructorภายในคลาสลูก
     def __init__(self,name,salary,position):
         super().__init__(name,salary,position) 
-#super() สืบทอดคุณสมบัติมาจาก Employee,._init__ สืบทอดคุณสมบัติมาจาก Employee ,(ชื่อparameterที่จะส่งเข้าไป)
         super()._showdata()#ใช้class แม่เป็นคนเรียกใช้
 
 class Programmer(Employee):
@@ -78,6 +96,22 @@ sales = Sales("สมใจ",60000,"แผนกขาย")
 print(account.companyname)
 #อยากทราบเงินเดือนต่ําสุดของprogrammer
 print("เงินเดือนต่ำสุดของprogrammer = ",programmer.minsalary)
+
+#*****เพิ่มโค้ดส่วนนี้********
+print("รายได้ต่อปี  = {}".format(account._getsalaryIncome()))
+#{}.format(ชื่อobject._ชื่อmethod())คือเรียกใช้method ,fomat ใช้ในการแสดงผล
+print("รายได้ต่อปี  = {}".format(manager._getsalaryIncome()))
+print("รายได้ต่อปี  = {}".format(programmer._getsalaryIncome()))
+print("รายได้ต่อปี  = {}".format(sales._getsalaryIncome()))
+
+#วิธีเรียกใช้งาน ที่แปลง object เป็น string ,มาแสดงข้อมูลทั้งหมด
+print("แสดงข้อมูล\n{}".format(account))
+print("แสดงข้อมูล\n{}".format(manager))
+print("แสดงข้อมูล\n{}".format(programmer))
+print("แสดงข้อมูล\n{}".format(sales))
+
+
+
 
 
 
